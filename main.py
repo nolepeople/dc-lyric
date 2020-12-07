@@ -54,6 +54,8 @@ async def lyric(ctx,*args):
           try:
               url = azlyric.find(query).results()[int(msg.content)]["url"]
               await ctx.send("wait")
+              if azlyric.get(url).lyric() == None:
+                 return await ctx.send("oh not found it turns out :(")
               return await ctx.send("```{}```".format(azlyric.get(url).lyric()))
           except IndexError:
               return await ctx.send("the above options are not found")
