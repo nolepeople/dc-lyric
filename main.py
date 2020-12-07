@@ -1,11 +1,11 @@
-import sys
+import sys,os
 import discord
 import asyncio
 from discord.ext import commands
 from src import azlyric
 
 
-TOKEN = "Nzc3ODY1MzE4MTIxODY1MjI2.X7Jphw.8VcYrQwF-aWNGdZaZmq6JbnNtV0"
+#TOKEN = "Nzc3ODY1MzE4MTIxODY1MjI2.X7Jphw.8VcYrQwF-aWNGdZaZmq6JbnNtV0"
 cmd = commands.Bot(command_prefix="",help_command=None)
 
 @cmd.event
@@ -67,7 +67,7 @@ async def on_command_error(ctx,error):
        pass
 
 def main():
-    return cmd.run(TOKEN)
+    return cmd.run(os.environ["TOKEN"])
 
 if __name__=="__main__":
     main()
