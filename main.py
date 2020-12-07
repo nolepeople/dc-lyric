@@ -1,0 +1,81 @@
+import sys
+import discord
+import asyncio
+from discord.ext import commands
+from src import azlyric
+
+
+TOKEN = "Nzc3ODY1MzE4MTIxODY1MjI2.X7Jphw.8VcYrQwF-aWNGdZaZmq6JbnNtV0"
+cmd = commands.Bot(command_prefix="",help_command=None)
+
+@cmd.event
+async def on_ready():
+    print ("ready!")
+
+@cmd.command(name="!help")
+async def help(ctx):
+    info = """```
+This is bot for find music lyrics
+Created by natsuya#8537
+thanks to azlyrics.com
+
+usage : !lyric <title>
+
+find me on youtube : HnvDie
+    ```
+    """
+    await ctx.send(info)
+
+@cmd.command(name="!lyric")
+async def lyric(ctx,*args):
+    query = " ".join(args)
+    if len(query) <= 1:
+       return
+
+    c = """
+"""
+    if azlyric.find(query).result() == None:
+       return await ctx.send("```sorry result not found for {}```".format(query))
+
+    num = 0
+    for a in azlyric.find(query).results():
+        c += "{}. {}\n".format(num,a["title"])
+        num += 1
+    await ctx.send("```{}```".format(c))
+
+    def check(author):
+        def inner_check(message):
+            return message.author == author
+        return inner_check
+
+    try:
+       msg = await cmd.wait_for("message",check=check(ctx.author),timeout=30)
+       if int(msg.content):
+          try:
+              url = azlyric.find(query).results()[int(msg.content)]["url"]
+              await ctx.send("wait")
+              return await ctx.send("```{}```".format(azlyric.get(url).lyric()))
+          except IndexError:
+              return await ctx.send("the above options are not found")
+    except asyncio.TimeoutError as e:
+         return await ctx.send("please try again, timeout :)")
+
+
+@cmd.event
+async def on_command_error(ctx,error):
+    if isinstance(error,commands.CommandNotFound):
+       pass
+
+def main():
+    return cmd.run(TOKEN)
+
+if __name__=="__main__":
+    main()
+
+    
+
+
+
+
+
+
