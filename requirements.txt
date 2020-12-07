@@ -1,4 +1,3 @@
 BeautifulSoup4
 requests
 discord.py
-git+https://github.com/nolepeople/dc-lyric
