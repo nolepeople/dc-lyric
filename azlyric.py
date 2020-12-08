@@ -13,6 +13,7 @@ class find:
 
     def result(self):
         self.default_r = re.findall(r"\s{1,}\d{1,}\..*?\s(.*?)\s{1,}</td>",self.req)
+        print (self.default_r)
         self.list = []
         for hi in self.default_r:
             if "/h/" not in hi:
