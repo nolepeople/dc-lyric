@@ -24,7 +24,9 @@ class find:
                   except IndexError:
                       pass
         if len(self.list) <= 1:
+            print (self.list)
             return None
+        print (self.list)
         return self.list
 
     def results(self):
