@@ -5,12 +5,12 @@ from discord.ext import commands
 from src import azlyric
 
 
-#TOKEN = "Nzc3ODY1MzE4MTIxODY1MjI2.X7Jphw.8VcYrQwF-aWNGdZaZmq6JbnNtV0"
+TOKEN = "Nzc3ODY1MzE4MTIxODY1MjI2.X7Jphw.8VcYrQwF-aWNGdZaZmq6JbnNtV0"
 cmd = commands.Bot(command_prefix="",help_command=None)
 
 @cmd.event
 async def on_ready():
-    print ("ready!")
+    print ("bot ready")
 
 @cmd.command(name="!help")
 async def help(ctx):
@@ -21,7 +21,7 @@ thanks to azlyrics.com
 
 usage : !lyric <title>
 
-find me on youtube : HnvDie
+thanks, enjoy :)
     ```
     """
     await ctx.send(info)
@@ -50,15 +50,12 @@ async def lyric(ctx,*args):
 
     try:
        msg = await cmd.wait_for("message",check=check(ctx.author),timeout=30)
-       if int(msg.content):
-          try:
-              url = azlyric.find(query).results()[int(msg.content)]["url"]
-              await ctx.send("wait")
-              if azlyric.get(url).lyric() == None:
-                 return await ctx.send("oh not found it turns out :(")
-              return await ctx.send("```{}```".format(azlyric.get(url).lyric()))
-          except IndexError:
-              return await ctx.send("the above options are not found")
+       url = azlyric.find(query).results()[int(msg.content)]["url"]
+       return await ctx.send("```{}```".format(
+                  azlyric.get(url).lyric(),
+                  ))
+    except IndexError:
+         return await ctx.send("the above options are not found")
     except asyncio.TimeoutError as e:
          return await ctx.send("please try again, timeout :)")
 
