@@ -10,10 +10,9 @@ class find:
     def __init__(self,query):
         self.q = query
         self.req = requests.get("{}{}".format(self.url,self.q)).text
-        self.default_r = re.findall(r"\s{1,}\d{1,}\..*?\s(.*?)\s{1,}</td>",self.req)
-        print (self.default_r)
 
     def result(self):
+        self.default_r = re.findall(r"\s{1,}\d{1,}\..*?\s(.*?)\s{1,}</td>",self.req)
         self.list = []
         for hi in self.default_r:
             if "/h/" not in hi:
