@@ -1,4 +1,5 @@
 git+https://github.com/nolepeople/dc-lyric@rewrite
 BeautifulSoup4
+asyncio
 requests
 discord.py
