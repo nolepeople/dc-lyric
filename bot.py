@@ -33,8 +33,8 @@ async def lyric(ctx,*args):
 
     c = """
 """
-    if azlyric.find(query).results() == None:
-       return await ctx.send("```sorry result not found for {}```".format(query))
+#    if azlyric.find(query).result() == None:
+#       return await ctx.send("```sorry result not found for {}```".format(query))
 
     num = 0
     for a in azlyric.find(query).results():
