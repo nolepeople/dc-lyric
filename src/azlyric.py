@@ -68,4 +68,6 @@ class get:
         for _ in [div.text for div in self.soup.find_all("div",{"class":None})]:
            self.lyr += _
 
+        if len(self.lyr) <= 1:
+           return None
         return self.lyr

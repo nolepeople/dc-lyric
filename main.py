@@ -68,7 +68,9 @@ async def on_command_error(ctx,error):
     if isinstance(error,commands.CommandNotFound):
        pass
 
-cmd.run(str(os.environ["TOKEN"]))
+
+if __name__=="__main__":
+   cmd.run(str(os.environ["TOKEN"]))
 
 
 
