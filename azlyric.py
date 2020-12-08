@@ -10,6 +10,7 @@ class find:
     def __init__(self,query):
         self.q = query
         self.req = requests.get("{}{}".format(self.url,self.q)).text
+        print (self.req)
         self.default_r = re.findall(r"\s{1,}\d{1,}\..*?\s(.*?)\s{1,}</td>",self.req)
 
     def result(self):
@@ -24,9 +25,7 @@ class find:
                   except IndexError:
                       pass
         if len(self.list) <= 1:
-            print (self.list)
             return None
-        print (self.list)
         return self.list
 
     def results(self):
