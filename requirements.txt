@@ -1,4 +1,4 @@
-git+https://github.com/nolepeople/dc-lyric@rewrite
+git+https://github.com/nolepeople/dc-lyric
 BeautifulSoup4
 asyncio
 requests
