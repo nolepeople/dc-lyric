@@ -2,9 +2,10 @@ import sys,os
 import discord
 import asyncio
 from discord.ext import commands
-import azlyric
+from src import azlyric
 
-TOKEN = "Nzc3ODY1MzE4MTIxODY1MjI2.X7Jphw.8VcYrQwF-aWNGdZaZmq6JbnNtV0"
+
+#TOKEN = "Nzc3ODY1MzE4MTIxODY1MjI2.X7Jphw.8VcYrQwF-aWNGdZaZmq6JbnNtV0"
 cmd = commands.Bot(command_prefix="",help_command=None)
 
 @cmd.event
