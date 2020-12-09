@@ -62,7 +62,8 @@ class find:
 class get:
 
     def __init__(self,u):
-        self.req = requests.get(u,headers={"User-Agent":'Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) App    leWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25'}).text
+        self.req = requests.get(u,headers={"User-Agent":
+'Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) App leWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25'}).text
 
     def lyric(self):
         self.soup = BeautifulSoup(self.req,"html.parser")
