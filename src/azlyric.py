@@ -1,4 +1,4 @@
-[Aimport requests
+import requests
 import re,sys
 from bs4 import BeautifulSoup
 

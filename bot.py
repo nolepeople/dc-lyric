@@ -65,6 +65,6 @@ async def on_command_error(ctx,error):
        pass
 
 #heroku
-#cmd.run(str(os.environ["TOKEN"]))
+cmd.run(str(os.environ["TOKEN"]))
 #local
-cmd.run("Nzc3ODY1MzE4MTIxODY1MjI2.X7Jphw.BSXXdInCUSzwmQ2oJ9J5PLpNaaA")
+#cmd.run("Nzc3ODY1MzE4MTIxODY1MjI2.X7Jphw.BSXXdInCUSzwmQ2oJ9J5PLpNaaA")
