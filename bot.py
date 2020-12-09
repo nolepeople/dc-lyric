@@ -5,7 +5,6 @@ from discord.ext import commands
 from src import azlyric
 
 
-#TOKEN = "Nzc3ODY1MzE4MTIxODY1MjI2.X7Jphw.8VcYrQwF-aWNGdZaZmq6JbnNtV0"
 cmd = commands.Bot(command_prefix="",help_command=None)
 
 @cmd.event
@@ -65,4 +64,7 @@ async def on_command_error(ctx,error):
     if isinstance(error,commands.CommandNotFound):
        pass
 
-cmd.run(str(os.environ["TOKEN"]))
+#heroku
+#cmd.run(str(os.environ["TOKEN"]))
+#local
+cmd.run("Nzc3ODY1MzE4MTIxODY1MjI2.X7Jphw.BSXXdInCUSzwmQ2oJ9J5PLpNaaA")
