@@ -1,9 +1,9 @@
 import sys,os
 import discord
 import asyncio
-import keep_alive
 from discord.ext import commands
 from src import azlyric
+from src import keep_alive
 
 cmd = commands.Bot(command_prefix="", help_command=None)
 
