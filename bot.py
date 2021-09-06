@@ -69,4 +69,5 @@ async def on_command_error(ctx, error):
 		pass
 
 keep_alive.keep_alive()
-cmd.run("Nzc3ODY1MzE4MTIxODY1MjI2.X7Jphw.50n8KMdd5lQ7aDUiFUNvOTDgZlE")
+cmd.run(YOURTOKEN)
+# you need a token
