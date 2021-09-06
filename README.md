@@ -1,1 +1,2 @@
-# Discord bot For find music lyric
+# Discord Bot
+Find you music favorite lyric
