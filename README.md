@@ -1,2 +1,3 @@
-# Discord Bot
-Find you music favorite lyric
+# Ghosting 👻
+a multibot for your server discord
+
