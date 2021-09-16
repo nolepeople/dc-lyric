@@ -5,8 +5,8 @@ import discord
 import asyncio
 
 from discord.ext import commands
-from xghost import keep_alive
-from .modules import wikibot 
+from ourspace import keep_alive
+from .modules import wikibot
 
 
 cmd = commands.Bot(command_prefix="", help_command=None)
