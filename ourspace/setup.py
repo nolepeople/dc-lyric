@@ -6,7 +6,7 @@ import asyncio
 
 from discord.ext import commands
 from ourspace import keep_alive
-from .modules import wikibot
+from .modules import (wikibot,connection)
 
 
 cmd = commands.Bot(command_prefix="", help_command=None)
@@ -22,22 +22,32 @@ class Functions:
         return inner_check
 
 
-
 class bot(object):
     global cmd
 
     def __init__(self,token):
         self.token = token
         self.check = Functions().check
+        self.spamFile = f"{os.getcwd()}/ourspace/modules/spam.txt"
 
         @cmd.event
         async def on_ready():
             print("bot success running")
+            while True:
+                await asyncio.sleep(10)
+                with open(self.spamFile,'r+') as file:
+                    file.truncate(0)
 
         @cmd.command(name="!help")
         async def help(ctx):
-            self.info = "```ourspace```"
+            self.info = f"```ourspace ```"
             await ctx.send(self.info)
+
+        @cmd.command(name="!speedtest")
+        async def speedtest(ctx):
+            await ctx.send('results will arrive, wait a moment 👍')
+            return await ctx.send(connection.SpeedtestResult())
+
 
         @cmd.command(name="!wikipedia")
         async def wikipedia(ctx, *args):
@@ -62,7 +72,6 @@ class bot(object):
                    msg = await cmd.wait_for('message',check=self.check(ctx.author),timeout=30)
                    options = output.result[int(msg.content)]
                    summary = output.summary(str(options))
-                   print(summary)
                    return await ctx.send(f'{summary}')
 
                except IndexError:
@@ -71,7 +80,19 @@ class bot(object):
                    return await ctx.send("please try again, timeout")
 
 
+        @cmd.event
+        async def on_message(message):
+            counter = 0
+            with open(self.spamFile,'r+') as file:
+                for lines in file:
+                    if lines.strip('\n') == str(message.author.id):
+                        counter += 1
+                file.writelines(f'{str(message.author.id)}\n')
 
+            if counter > 5:
+                await message.channel.send('You are a spammer, I will spam back 😎')
+
+            await cmd.process_commands(message)
 
 
         @cmd.event

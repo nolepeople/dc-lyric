@@ -1,4 +1,4 @@
 discord
 wikipedia
 flask
-
+speedtest-cli
