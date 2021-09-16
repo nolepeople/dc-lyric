@@ -5,7 +5,7 @@ import discord
 import asyncio
 
 from discord.ext import commands
-from ourspace import keep_alive
+from xghost import keep_alive
 from .modules import wikibot 
 
 
@@ -28,15 +28,16 @@ class bot(object):
 
     def __init__(self,token):
         self.token = token
+        self.check = Functions().check
 
         @cmd.event
         async def on_ready():
-            print("bot ready!")
+            print("bot success running")
 
         @cmd.command(name="!help")
         async def help(ctx):
-            info = "```ourspace```"
-            await ctx.send(info)
+            self.info = "```ourspace```"
+            await ctx.send(self.info)
 
         @cmd.command(name="!wikipedia")
         async def wikipedia(ctx, *args):
@@ -46,6 +47,8 @@ class bot(object):
 
             if lang:
                 lang = lang[0]
+            else:
+               lang = "en"
 
             keyword = re.sub('-(.*?)$','',userInput)
             output = wikibot.wiki(keyword,lang)
@@ -54,6 +57,21 @@ class bot(object):
                   return await ctx.send(output.search_result()['info'])
             except Exception as e:
                await ctx.send(output.search_result())
+               try:
+                   await ctx.send('Enter the number of your choice (timeout:30s)')
+                   msg = await cmd.wait_for('message',check=self.check(ctx.author),timeout=30)
+                   options = output.result[int(msg.content)]
+                   summary = output.summary(str(options))
+                   print(summary)
+                   return await ctx.send(f'{summary}')
+
+               except IndexError:
+                   return await ctx.send("the above options are not found")
+               except asyncio.TimeoutError as e:
+                   return await ctx.send("please try again, timeout")
+
+
+
 
 
         @cmd.event

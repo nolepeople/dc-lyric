@@ -1,4 +1,4 @@
-from ourspace.setup import runserver
+from xghost.setup import runserver
 import sys
 
 if __name__=="__main__":

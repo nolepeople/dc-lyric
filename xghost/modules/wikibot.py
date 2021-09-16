@@ -3,12 +3,10 @@ import wikipedia
 
 class wiki:
 
-    def __init__(self,query,lang="en"):
-        if lang == "":
-           lang = "en"
-
+    def __init__(self,query,lang):
+        print (lang)
         self.wikipedia = wikipedia
-        self.wikipedia.set_lang = lang
+        self.wikipedia.set_lang(lang)
         self.query = query
         self.lang = lang
 
@@ -34,4 +32,6 @@ class wiki:
  
     def summary(self,keyword):
         self.keyword = keyword
-        return self.wiki.summary(self.keyword)
+        return f"""```
+{self.wikipedia.summary(self.keyword,sentences=1)}
+```"""
