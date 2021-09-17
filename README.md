@@ -1,8 +1,8 @@
 # ourspace 🚀
 a multibot for your server discord
 
-- Feature
-  - `wikipedia search`
-  - `speedtest [ping, download, upload]`
-  - `do spam back if anyone spams`
+# Feature
+- `wikipedia search`
+- `connection speed test`
+- `do spam back if anyone spams`
   
