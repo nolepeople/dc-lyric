@@ -6,7 +6,11 @@ import asyncio
 
 from discord.ext import commands
 from ourspace import keep_alive
-from .modules import (wikibot,connection)
+from .modules import (
+        wikibot,
+        connection,
+        anisearch,
+        )
 
 
 cmd = commands.Bot(command_prefix="", help_command=None)
@@ -48,9 +52,14 @@ class bot(object):
             await ctx.send('results will arrive, wait a moment 👍')
             return await ctx.send(connection.SpeedtestResult())
 
+        @cmd.command(name="!anime")
+        async def anime(ctx,*args):
+            await ctx.send(anisearch.Anime.website())
 
         @cmd.command(name="!wikipedia")
         async def wikipedia(ctx, *args):
+            if not args:
+               return await ctx.send('`!help`')
 
             userInput = " ".join(args)
             lang = (lambda get_label: re.findall('-lang=([\w\d]+)',get_label))(userInput)

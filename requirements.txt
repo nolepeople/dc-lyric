@@ -2,3 +2,4 @@ discord
 wikipedia
 flask
 speedtest-cli
+lk21

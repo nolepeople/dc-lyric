@@ -1,10 +1,9 @@
-
-import wikipedia 
+import wikipedia
+from . import ListToString
 
 class wiki:
 
     def __init__(self,query,lang):
-        print (lang)
         self.wikipedia = wikipedia
         self.wikipedia.set_lang(lang)
         self.query = query
@@ -12,24 +11,12 @@ class wiki:
 
     def search_result(self):
         self.result = self.wikipedia.search(self.query)
+
         if self.result:
+           return ListToString(self.result)
 
-           self.Newlist = []
-           self.index = 0
-
-           for self.name in self.result:
-               self.Newlist.append(f'{self.index}. {self.name}')
-               self.index += 1
-
-           self.output = '\n'.join(self.Newlist)
-           return f"""```
-{self.output}
-```"""
         return {'status':None,'info':'Sorry result not found :('}
-     
 
-
- 
     def summary(self,keyword):
         self.keyword = keyword
         return f"""```
