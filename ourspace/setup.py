@@ -12,6 +12,8 @@ from .modules import (
         anisearch,
         )
 
+from ourspace.modules.helper import Helper
+
 
 cmd = commands.Bot(command_prefix="", help_command=None)
 
@@ -37,10 +39,10 @@ class bot(object):
         @cmd.event
         async def on_ready():
             print("bot success running")
-            while True:
-                await asyncio.sleep(10)
-                with open(self.spamFile,'r+') as file:
-                    file.truncate(0)
+#            while True:
+#                await asyncio.sleep(10)
+#                with open(self.spamFile,'r+') as file:
+#                    file.truncate(0)
 
         @cmd.command(name="!help")
         async def help(ctx):
@@ -54,7 +56,34 @@ class bot(object):
 
         @cmd.command(name="!anime")
         async def anime(ctx,*args):
-            await ctx.send(anisearch.Anime.website())
+            usrInput = ' '.join(args)
+            if usrInput == "display-hosts":
+                return await ctx.send(anisearch.Anime.website())
+            label = Helper.getLabel(usrInput,'website')
+            if label == None:
+               await ctx.send("you didn't set the website, so this is the result of the default which is wibudesu.  (!anime display-hosts) for display all websites\n\n")
+               label = 'wibudesu'
+            keyword = re.sub(r'-(.*?)$','',usrInput)
+
+            output = anisearch.Anime(keyword,label)
+            result = output.result()
+            try:
+               if result['status'] == None:
+                  return await ctx.send(result['info'])
+            except Exception as e:
+               await ctx.send(result)
+               await ctx.send('Enter the number of your choice (timeout:30s)')
+               try:
+                   msg = await cmd.wait_for('message',check=self.check(ctx.author),timeout=30)
+                   _ = output.extract_urls(int(msg.content))
+                   for title in _:
+                       await ctx.send(title['key'])
+                       for __ in title['value']:
+                           await ctx.send(__['value'])
+               except IndexError:
+                   return await ctx.send("the above options are not found")
+               except asyncio.TimeoutError as e:
+                   return await ctx.send("please try again, timeout")
 
         @cmd.command(name="!wikipedia")
         async def wikipedia(ctx, *args):
@@ -89,19 +118,19 @@ class bot(object):
                    return await ctx.send("please try again, timeout")
 
 
-        @cmd.event
-        async def on_message(message):
-            counter = 0
-            with open(self.spamFile,'r+') as file:
-                for lines in file:
-                    if lines.strip('\n') == str(message.author.id):
-                        counter += 1
-                file.writelines(f'{str(message.author.id)}\n')
-
-            if counter > 5:
-                await message.channel.send('You are a spammer, I will spam back 😎')
-
-            await cmd.process_commands(message)
+#        @cmd.event
+#        async def on_message(message):
+#            counter = 0
+#            with open(self.spamFile,'r+') as file:
+#                for lines in file:
+#                    if lines.strip('\n') == str(message.author.id):
+#                        counter += 1
+#                file.writelines(f'{str(message.author.id)}\n')
+#
+#            if counter > 5:
+#                await message.channel.send('You are a spammer, I will spam back 😎')
+#
+#            await cmd.process_commands(message)
 
 
         @cmd.event
