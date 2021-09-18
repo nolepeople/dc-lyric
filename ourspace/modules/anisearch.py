@@ -9,7 +9,7 @@ class Anime:
 
     def result(self):
         if self.server.lower() not in [web for web in self.website().split('\n')]:
-            return "return await ctx.send('server not found')"
+            return {'status':None,'info':"website/host not found"}
 
         self.scraper = \
             eval('ex.{}.{}()'.format(self.server,self.server.capitalize()))
