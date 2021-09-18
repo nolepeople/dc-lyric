@@ -51,11 +51,3 @@ class Anime:
         return """```
 {}
 ```""".format('\n'.join(ListS))
-
-
-if __name__=="__main__":
-    a = Anime('tokyo','wibudesu')
-    a.result()
-    print (a.infoRes[1])
-    print (a.extract_urls(0))
-
