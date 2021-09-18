@@ -12,7 +12,7 @@ from .modules import (
         anisearch,
         )
 
-from ourspace.modules.helper import Helper
+from ourspace.modules.helper import *
 
 
 cmd = commands.Bot(command_prefix="", help_command=None)
@@ -59,7 +59,7 @@ class bot(object):
             usrInput = ' '.join(args)
             if usrInput == "display-hosts":
                 return await ctx.send(anisearch.Anime.website())
-            label = Helper.getLabel(usrInput,'website')
+            label = getLabel(usrInput,'website')
             if label == None:
                await ctx.send("you didn't set the website, so this is the result of the default which is wibudesu.  (!anime display-hosts) for display all websites\n\n")
                label = 'wibudesu'

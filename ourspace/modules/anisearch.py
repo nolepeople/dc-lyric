@@ -1,5 +1,5 @@
 import lk21.extractors as ex
-from .helper import Helper
+from .helper import *
 
 class Anime:
 
@@ -18,7 +18,7 @@ class Anime:
         self.titles = [title['title'] for title in self.scraper.search(self.query)]
 
         if self.titles:
-           return Helper.ListToString(self.titles)
+           return ListToString(self.titles)
         return {'status':None,'info':"sorry result not found :("}
 
     def extract_urls(self,ID):

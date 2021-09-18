@@ -1,5 +1,5 @@
 import wikipedia
-from .helper import Helper
+from .helper import *
 
 class wiki:
 
@@ -13,7 +13,7 @@ class wiki:
         self.result = self.wikipedia.search(self.query)
 
         if self.result:
-           return Helper.ListToString(self.result)
+           return ListToString(self.result)
 
         return {'status':None,'info':'Sorry result not found :('}
 
