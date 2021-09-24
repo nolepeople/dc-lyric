@@ -5,6 +5,6 @@ this project doesn't follow the standard code from discord-py so it will look ve
 # Feature
 - `wikipedia search`
 - `connection speed test`
-- `do spam back if anyone spams (disbaled)`
+- `do spam back if anyone spams (disabled)`
 - `anisearch: find anime sub indo`
   
